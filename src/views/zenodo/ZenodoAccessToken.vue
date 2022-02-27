@@ -150,6 +150,7 @@
 
   import path from "path";
   import axios from "axios";
+  import fs from "fs-extra";
   import { ElLoading } from "element-plus";
   import { marked } from "marked";
 
@@ -328,14 +329,13 @@
         }
       },
       getAllFilesFromFolder(dir) {
-        let filesystem = require("fs");
         let that = this;
         function dfs(dir) {
           let results = [];
-          filesystem.readdirSync(dir).forEach(function (file) {
+          fs.readdirSync(dir).forEach(function (file) {
             let newObj = {};
             let filefullname = path.join(dir, file);
-            let stat = filesystem.statSync(filefullname);
+            let stat = fs.statSync(filefullname);
             if (stat && stat.isDirectory()) {
               newObj.label = file;
               newObj.isDir = true;
