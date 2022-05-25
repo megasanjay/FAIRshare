@@ -301,10 +301,7 @@ def getRepoContentTree(access_token, owner, repo):
         response = requests.request("GET", url, headers=headers, data=payload)
 
         res = response.json()
-        if "default_branch" in res:
-            return res["default_branch"]
-        else:
-            return "master"
+        return res["default_branch"] if "default_branch" in res else "master"
 
     defaultBranch = getDefaultBranch()
 
